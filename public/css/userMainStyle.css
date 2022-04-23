@@ -1,0 +1,13 @@
+.main{
+    height: 1000px;
+    display: grid;
+    grid-template-columns: 40% 40%;
+    grid-template-rows: 40% 40%;
+    border:1px solid black;
+    justify-content: space-evenly;
+    align-content: space-evenly;
+}
+.image-offers{
+    height: 400px;
+    width: 760px;
+}

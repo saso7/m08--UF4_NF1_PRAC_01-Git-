@@ -1,0 +1,112 @@
+.header-main{
+    border:2px solid black;
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+    padding-left:100px;
+    padding-right:100px;
+    height: 150px;
+    background: linear-gradient(red, rgb(72, 2, 2));
+}
+.header-logo{
+    margin-left:auto;
+    margin-right:auto;
+    margin-top:auto;
+    margin-bottom:auto;
+}
+
+.drop-down-box{
+    margin-left:auto;
+    margin-right:auto;
+    margin-top:auto;
+    margin-bottom:auto;
+    height: 50px;
+    width: 250px;
+    border:2px solid white;
+
+}
+.drop-down-button{
+    height: 50px;
+    width: 250px;
+    align-items: center;
+    justify-items: center;
+    align-content: center;
+    justify-content: center;
+    background: transparent;
+    display: grid;
+    grid-template-columns: 15% 30%;
+    color:white;
+}
+.svg-stuff{
+    height: 20px;
+    fill:currentColor;
+}
+.drop-down-product-title{
+    text-align: left;
+    color:white;
+}
+.header-topnav{
+    margin-left:auto;
+    margin-right:auto;
+    margin-top:auto;
+    margin-bottom:auto;
+    border:2px solid white;
+    height: 25px;
+    width: 350px;
+    text-align:center;
+    
+}
+.input-topnav{
+    margin-top:2.5px;
+
+    color: white;
+    background-color: transparent;
+}
+.input-topnav::placeholder {
+    color: white;
+    opacity: 1; /* Firefox */
+  }
+.header-session{
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+    margin-left:auto;
+    margin-right:auto;
+    margin-top:auto;
+    margin-bottom:auto;
+    width: 370px;
+}
+.header-noSession{
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+    margin-left:auto;
+    margin-right:auto;
+    margin-top:auto;
+    margin-bottom:auto;
+    width: 370px;
+}
+.header-login{
+    display: grid;
+    grid-template-columns: 50% 50%;
+    width: 90px;
+}
+
+.header-register{
+    display: grid;
+    grid-template-columns: 50% 50%;
+    width: 90px;
+}
+.header-basket{
+    display: grid;
+    grid-template-columns: 50% 50%;
+    width: 90px;
+}
+.header-all-links{
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+.header-links:hover{
+    color:blue;
+}
+.header-links{
+    width:100px;
+    color:white
+}
