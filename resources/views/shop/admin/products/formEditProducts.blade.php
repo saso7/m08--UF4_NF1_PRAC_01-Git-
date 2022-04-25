@@ -4,7 +4,7 @@
     <form action="{{route('editing_product')}}" method="POST" style="text-align:center" enctype="multipart/form-data">
         @csrf
         <div>
-            <label for="name">Your about to change this Category name:</label>
+            <label for="name">Your about to change this Product:</label>
             <br>
             <select id="name" name="name" required>
                     <option value = "{{$products[0]->name}}" >{{$products[0]->name}}</option>
@@ -22,7 +22,11 @@
 
             <label for="name">New Product's Category Id:</label>
             <br>
-            <input name = "newCategoryId" type="text" value="{{$products[0]->category_id}}"/>
+            <select name="newCategoryId" id="newCategoryId">
+                @foreach($categories_id as $category_id)
+                    <option  value="{{$category_id->id}}">{{$category_id->id}}</option>
+                @endforeach
+            </select>
             <br>
 
             

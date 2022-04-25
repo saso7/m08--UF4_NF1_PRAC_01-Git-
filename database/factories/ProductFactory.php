@@ -18,7 +18,7 @@ class ProductFactory extends Factory
      */
     public function definition()
     {
-        $fileNum = strval($this->faker->numberBetween(1,6));
+        // $fileNum = strval($this->faker->numberBetween(1,6));
         $categories = Category::all();
         $category = $categories->random();
         $category_id = $category->id;
@@ -27,7 +27,7 @@ class ProductFactory extends Factory
             "price" => $this->faker->randomFloat(20, 0, 800),
             "amount" => $this->faker->randomDigit(20,500),
             "description" => Str::ucfirst($this->faker->text(255)),
-            "file_path" => "public/images/imatgePc".$fileNum.".png",
+            // "file_path" => "public/images/imatgePc".$fileNum.".png",
             "category_id" => $category_id,
             // This way will be the same in one line
             // "category_id" => Category::all()->random()->id,

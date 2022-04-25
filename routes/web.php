@@ -66,6 +66,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('/products/delete/{product}', [ProductController::class, "delete"])->name('delete_product');
 
     // USER PART
+
     Route::get('/televisions', [ProductController::class, "indexTv"])->name('televisions');
     Route::get('/productDetail/{product}', [ProductController::class, "productDetail"])->name('productDetail');
     Route::post('/add/Basket/{productId}', [ProductController::class, "addToBasket"])->name('addtobasket');
@@ -77,7 +78,8 @@ Route::group(['middleware' => ['auth']], function() {
     
     
 });
+// Things we can acces even without been logged in
 
-
+Route::get('/categoryView/{categoryName}', [DashboardController::class, "categoryView"])->name('categoryView');
 
 require __DIR__.'/auth.php';

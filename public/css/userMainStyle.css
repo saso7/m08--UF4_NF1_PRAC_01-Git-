@@ -10,12 +10,12 @@
 .image-offers{
    width: 100%;
 }
-.televisionList{
+.televisionList.categoryList{
     display: grid;
     grid-template-columns: 50% 50%;
     justify-items: center;
     align-items: center;
 }
-.TvList{
+.TvList,.catList{
     width:100px;
 }

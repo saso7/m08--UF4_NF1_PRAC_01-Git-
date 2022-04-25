@@ -50,13 +50,13 @@ class ProductController extends Controller
     public function productDetail($product){
 
         if(DB::table('products')->where('id',$product)){
-            $table = DB::table('products')->where('id',$product)->get();
+            $products = DB::table('products')->where('id',$product)->get();
         }
         
         $categories = Category::all();
         return view("shop.user.productDetails", [
             'categories' => $categories,
-            'product' => $table,
+            'product' => $products,
         ]);
     }
 
@@ -146,15 +146,15 @@ class ProductController extends Controller
 
     public function create()
     {
-        $products = Product::all();
+        $categories = Category::all();
         $only_id = [];
-        foreach($products as $product){
-            array_push($only_id, $product->category_id);
+        foreach($categories as $category){
+            array_push($only_id, $category->id);
         }
-        $productsId = array_unique($only_id);
-        sort($productsId);
+        // $productsId = array_unique($only_id);
+        // sort($productsId);
         return view("shop.admin.products.formAddProducts")
-            ->with('productsId',$productsId);
+            ->with('categoriesId',$only_id);
     }
 
 
@@ -213,8 +213,16 @@ class ProductController extends Controller
         if(DB::table('products')->where('id',$product)){
             $table = DB::table('products')->where('id',$product)->get();
         }
+        $categories_id = DB::table('categories')->select('id')->get();
+        // dd($categories_id );
+        // foreach($categories_id as $category_id){
+        //     dd($category_id->id);
+        // }
+            
+
         return view("shop.admin.products.formEditProducts", [
             'products' => $table,
+            'categories_id' => $categories_id,
         ]);
     }
 
@@ -237,6 +245,7 @@ class ProductController extends Controller
                 $table = DB::table('products')->where('name',$name)->get();
                 $path = $table[0]->file_path;
             }
+            
             DB::table('products')->where('name',$request->name)->update([
                 'name' => $name,
                 'price' => $price,
@@ -246,7 +255,6 @@ class ProductController extends Controller
                 'file_path'=>$path,
                 'updated_at' => $updated,
             ]);
-
             $products = Product::all();
             return view("shop.admin.products.listProducts", [
                 'products' => $products,

@@ -35,13 +35,20 @@
                     </button>
                     <div id="dropDown"style="display:none;">
                     @foreach($categories as $category)
-                        <div id="categoryName" style="display:none;"value = "{{$category->name}}" >{{$category->name}}</div>
+                        <a style="width:100%" href="{{ route('categoryView', ['categoryName' => $category->name]) }}">
+                            <div id="categoryName" style="display:none;"value = "{{$category->name}}" >{{$category->name}}</div>
+                        </a>
                     @endforeach
                     </div>
                 </div>
-            <div class="header-topnav">
-                <input class="input-topnav"type="text" placeholder="Search..">
-            </div>
+                <div style="display:grid;align-items: center;justify-items: center;">
+                    <form class="input-group" action="{{route('products')}}" method="GET">
+                        <input type="text" class="form-control" name="search" value="{{request()->query('search')}}" placeholder="Search">
+                        <div class="input-group-addon">
+                            <span class="input-group-text"><i class="ti-search"></i></span>
+                        </div>
+                    </form>
+                </div>
             <div class="header-session">
             @if (Route::has('login'))
                     @auth

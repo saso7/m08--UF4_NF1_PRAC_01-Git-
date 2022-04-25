@@ -5,12 +5,15 @@
 }
 .body{
     display:grid;
-    grid-template-columns: 69% 29%;
-    align-items: center;
+    height: 500px;
+    grid-template-columns: 70% 29%;
+    align-items: end;
+    justify-items: end;
 }
 .side{
     display:grid;
-    align-content: space-evenly;
+    justify-items: center;
+    align-content: center;
 }
 .price{
     text-align: right;

@@ -22,6 +22,7 @@
     @stop
 <!-- We only need to use once this X name and it will fill all the X in the listTemplate -->
     @section('X','PRODUCT\'S')
+    @section('Y','CATEGORY\'S')
     @section('Titles')
         <th>PRODUCT\'S PRICE</th>
         <th>PRODUCT\'S AMOUNT</th>

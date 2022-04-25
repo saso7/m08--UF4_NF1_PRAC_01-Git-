@@ -45,11 +45,11 @@
             <label for="name">Category Id</label>
             <br>
             <div>
-                <select name="category_id" id="category_id">
-                    @foreach($productsId as $productId)
-                        <option  value="{{ $productId }}">{{ $productId }}</option>
-                    @endforeach
-                </select>
+                <select name="newCategoryId" id="newCategoryId">
+                @foreach($categoriesId as $categoryId)
+                    <option  value="{{$categoryId}}">{{$categoryId}}</option>
+                @endforeach
+            </select>
             </div>
         <br>
         <div>

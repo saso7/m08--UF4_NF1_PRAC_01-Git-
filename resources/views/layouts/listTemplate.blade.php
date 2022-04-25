@@ -20,7 +20,7 @@
                             <tr>
                                 <!-- By using the same yield name (X in this case) we can repeat the same value in diferent places -->
                                 <th>@yield('X') NAME</th>
-                                <th>@yield('X') ID</th>
+                                <th>@yield('Y') ID</th>
                                 @yield('Titles')
                                 <th>EDIT</th>
                                 <th>DELETE</th>
