@@ -6,8 +6,7 @@
         <div>
             <label for="name">Your about to change this Category name:</label>
             <br>
-            <!-- <p>{{$category[0]->name}}</p>
-            <p>{{$category[0]->id}}</p> -->
+
             <select id="name" name="name" required>
                     <option value = "{{$category[0]->name}}" >{{$category[0]->name}}</option>
             </select>

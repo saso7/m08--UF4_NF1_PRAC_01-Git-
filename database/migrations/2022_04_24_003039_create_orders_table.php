@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->integer('users_id')->nullable(false)->constrained()->onDelete('cascade')->onUpdate('no action')->unique();
             $table->decimal('total_price')->nullable(false);
-            $table->enum('status',['pending','completed'])->nullable(false)->default('pending');
+            $table->enum('status',['pending','completed','delivered'])->nullable(false)->default('pending');
             
             $table->timestamps();
         });

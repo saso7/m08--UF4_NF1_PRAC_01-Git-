@@ -43,6 +43,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/products', [DashboardController::class, "index"])->name('products');
     // Route::get('/products', [ProductController::class, "index"])->name('products.show');
     Route::get('/categories', [CategoryController::class, "index"])->name('categories');
+    Route::get('/orders', [OrdersController::class, "index"])->name('orders');
 
     Route::get('/categories/create', [CategoryController::class, "create"])->name('categories.create');
     // Route::get('/products/create/{products}', [ProductController::class, "create"])->name('products.create');
@@ -52,16 +53,18 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('/products/adding', [ProductController::class, "add"])->name('adding_product');
     Route::post('/categories/adding', [CategoryController::class, "add"])->name('adding_category');
     
-
+    Route::post('/orders/edit', [OrdersController::class, "edit"])->name('editing_order');
     Route::post('/products/edit', [ProductController::class, "edit"])->name('edit_product');
     Route::post('/products/edit', [ProductController::class, "edit"])->name('editing_product');
     Route::post('/categories/edit', [CategoryController::class, "edit"])->name('editing_category');
     
-    
+
+    Route::get('/orders/edit/{order}', [OrdersController::class, "formEdit"])->name('form.edit.orders');
     Route::get('/categories/editing/{category}', [CategoryController::class, "formEdit"])->name('formEdit');
     Route::get('/products/edition/{product}', [ProductController::class, "formEdit"])->name('form.edit.products');
 
-
+    
+    Route::post('/categories/delete/{order}', [OrdersController::class, "delete"])->name('delete_order');
     Route::post('/categories/delete/{category}', [CategoryController::class, "delete"])->name('deleting_category');
     Route::post('/products/delete/{product}', [ProductController::class, "delete"])->name('delete_product');
 

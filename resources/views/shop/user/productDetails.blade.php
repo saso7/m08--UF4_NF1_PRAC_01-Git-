@@ -14,7 +14,7 @@
         <br>
         <input size='7px;' class="price" name="price" value="{{$product[0]->price}}" readonly/>€ per unit
         <br>
-        <input style="text-align:center;" size='7px;' class="quantity" name="quantity" type="number" value="1" style="text-align:right;"></input>
+        <input style="text-align:center;" size='7px;' class="quantity" name="quantity" type="number" min="1" max="{{$product[0]->amount}}" value="1" style="text-align:right;"></input>
         <!-- <a href="{{ route('addtobasket', ['productId' => $product[0]->id]) }}">
             <button class="basket">Add to basket</button>
         </a> -->
