@@ -18,9 +18,9 @@ class DashboardController extends Controller
             // return view('userdash', [
             //     'categories' => $categories,
             // ]);
-            return view('userMainPage', [
-                'categories' => $categories,
-            ]);
+            return view('shop.user.userMainPage')
+                ->with('categories', $categories);        
+            
         }
         // elseif(Auth::user()->hasRole('admin')){
         //     return view('dashboard');

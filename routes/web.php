@@ -4,6 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\OrdersController;
+use App\Http\Controllers\OrdersItemsController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -33,6 +36,7 @@ Route::get('/', function () {
 // })->middleware(['auth'])->name('admin');
 
 Route::group(['middleware' => ['auth']], function() {
+    // ADMIN PART
     // Throught this routes we will redirect the user to all the departaments we need.
     Route::get('/dashboard', 'App\Http\Controllers\DashboardController@index')->name('dashboard');
 
@@ -60,6 +64,17 @@ Route::group(['middleware' => ['auth']], function() {
 
     Route::post('/categories/delete/{category}', [CategoryController::class, "delete"])->name('deleting_category');
     Route::post('/products/delete/{product}', [ProductController::class, "delete"])->name('delete_product');
+
+    // USER PART
+    Route::get('/televisions', [ProductController::class, "indexTv"])->name('televisions');
+    Route::get('/productDetail/{product}', [ProductController::class, "productDetail"])->name('productDetail');
+    Route::post('/add/Basket/{productId}', [ProductController::class, "addToBasket"])->name('addtobasket');
+    
+    Route::get('/basket', [OrdersController::class, "indexBasket"])->name('basket');
+    Route::get('/basket/minus/{ordersItems}/{ordersItems2}/{ordersItems3}', [OrdersItemsController::class, "minusOne"])->name('minusOne');
+    Route::get('/basket/plus/{ordersItems}/{ordersItems2}/{ordersItems3}', [OrdersItemsController::class, "plusOne"])->name('plusOne');
+    Route::get('/basket/delete/{subOrderId}/{priceOfSubOrder}', [OrdersItemsController::class, "delete_subOrder"])->name('delete_subOrder');
+    
 });
 
 

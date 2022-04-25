@@ -1,0 +1,18 @@
+.main{
+    display:grid;
+    /* Set as almos 100% to leave the marging sides */
+    grid-template-columns: 79% 19%;
+}
+.body{
+    display:grid;
+    grid-template-columns: 69% 29%;
+    align-items: center;
+}
+.side{
+    display:grid;
+    align-content: space-evenly;
+}
+.price{
+    text-align: right;
+    border:none;
+}

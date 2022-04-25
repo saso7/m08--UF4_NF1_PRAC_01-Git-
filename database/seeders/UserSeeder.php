@@ -17,12 +17,16 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        $user = User::factory([
+        User::factory([
             "name" => "guillem",
             "email" => "guillem.lorente@inslapineda.com",
             "password" => Hash::make("sasoriuchiha7"), 
         ])->create()->roles()->attach(1);
-
+        User::factory([
+            "name" => "client1",
+            "email" => "client1@gmail.com",
+            "password" => Hash::make("sasoriuchiha7"), 
+        ])->create()->roles()->attach(2);
         // $user->roles()->attach(1);
     }
 }

@@ -16,27 +16,6 @@
 <body>
     @yield('offers')
 
-    <script type="text/javascript">
-
-        function show(categories){
-            var categories = document.querySelectorAll("#categoryName");
-            var listCategories = document.querySelector("#dropDown");
-            for(let category of categories){
-                category.setAttribute("style","padding-top:10px;background: linear-gradient(red, rgb(72, 2, 2));display:block;width:100%;height:35px;text-align:center;margin:0px auto;")
-            }
-            listCategories.setAttribute("style","display:flex;")
-
-
-            var button = document.querySelector("#drop-down-button");
-            // button.onclick="hide()";
-            button.setAttribute('onclick',hide);
-        }
-        function hide(){
-            var categories = document.querySelectorAll("#categoryName");
-            for(let category of categories){
-                category.setAttribute("style","display:none")
-            }
-        }
-    </script>
+    @yield('productsList')
 </body>
 </html>

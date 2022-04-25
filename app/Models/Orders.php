@@ -5,19 +5,23 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-// As category extends from model it already has all the methods to use into the database like update, insert, select, etc.
-class Category extends Model
+class Orders extends Model
 {
     use HasFactory;
 
     // Basicly what we do in here is letting the field be fillable otherwise you won't be able to put anything into it.
     protected $fillable = [
-        'name',
+        'customer_id',
+        'total_price',
+        'status',
+        'created_at',
+        'updated_at',
+
     ];
 
     //I need to use this function in order to associate both tables category and product
-    public function products()
+    public function OrdersItems()
     {
-        return $this->hasMany(Product::class);
+        return $this->hasMany(OrdersItems::class);
     }
 }
