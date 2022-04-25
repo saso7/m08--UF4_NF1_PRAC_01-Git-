@@ -9,42 +9,42 @@ use Illuminate\Support\Facades\Auth;
 
 class OrdersItemsController extends Controller
 {
-    public function minusOne($ordersItems,$ordersItems2,$ordersItems3){
-        $quantity = DB::table('orders_items')->select('quantity')->where('id',$ordersItems)->where('product_id',$ordersItems2)->get();
-        $price = DB::table('products')->where('id',$ordersItems2)->get();
-        $total_price = DB::table('orders')->select('total_price')->where('id',$ordersItems3)->get();
-         
+    public function minusOne($orderId,$priceProduct,$totalPrice,$productId,$subOrderId){
+        $quantity = DB::table('orders_items')->select('quantity')->where('id',$orderId)->where('product_id',$productId)->get();
+        // $price = DB::table('products')->where('id',$productId)->get();
+        // $total_price = DB::table('orders')->select('total_price')->where('id',$subOrderId)->get();
+        // dd($price);
         $quantity = $quantity[0]->quantity - 1;
-        $newTotalPrice = $total_price[0]->total_price - $price[0]->price ;
-
-        DB::table('orders_items')->where('id',$ordersItems)->where('product_id',$ordersItems2)->update([
+        $newTotalPrice = $totalPrice - $priceProduct ;
+        // dd($quantity);
+        DB::table('orders_items')->where('id',$orderId)->where('product_id',$productId)->update([
             'quantity' => $quantity,
             'updated_at' => now(),
         ]);
         // dd($quantity);
-        DB::table('orders')->where('id',$ordersItems3)->update([
+        DB::table('orders')->where('id',$subOrderId)->update([
             'total_price' => $newTotalPrice,
             'updated_at' => now(),
         ]);
         return redirect()->route('basket');
     }
     
-    public function plusOne($ordersItems,$ordersItems2,$ordersItems3){
+    public function plusOne($orderId,$priceProduct,$totalPrice,$productId,$subOrderId){
 
-        $quantity = DB::table('orders_items')->where('id',$ordersItems)->where('product_id',$ordersItems2)->get();
-        $price = DB::table('products')->where('id',$ordersItems2)->get();
-        $total_price = DB::table('orders')->select('total_price')->where('id',$ordersItems3)->get();
+        $quantity = DB::table('orders_items')->where('id',$orderId)->where('product_id',$productId)->get();
+        // $price = DB::table('products')->where('id',$productId)->get();
+        // $total_price = DB::table('orders')->select('total_price')->where('id',$subOrderId)->get();
         // dd($price);
         
         $quantity = $quantity[0]->quantity + 1;
-        $newTotalPrice = $price[0]->price + $total_price[0]->total_price;
+        $newTotalPrice = $totalPrice + $priceProduct ;
 
-        DB::table('orders_items')->where('id',$ordersItems)->where('product_id',$ordersItems2)->update([
+        DB::table('orders_items')->where('id',$orderId)->where('product_id',$productId)->update([
             'quantity' => $quantity,
             'updated_at' => now(),
         ]);
         // dd($quantity);
-        DB::table('orders')->where('id',$ordersItems3)->update([
+        DB::table('orders')->where('id',$subOrderId)->update([
             'total_price' => $newTotalPrice,
             'updated_at' => now(),
         ]);

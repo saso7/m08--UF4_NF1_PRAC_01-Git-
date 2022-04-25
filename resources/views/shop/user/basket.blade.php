@@ -15,7 +15,7 @@
             <div>{{$listOfPrices[$i]}}€</div>
             <label>Product Quantity</label>
             <div style="width:200px;display:grid;grid-template-columns: 33% 33% 33%;">
-                <a href="{{ route('minusOne',['ordersItems'=>$ordersItems[$i]->id,'ordersItems2'=>$ordersItems[$i]->product_id,'ordersItems3'=>$ordersItems[$i]->order_id]) }}">
+                <a href="{{ route('minusOne',['orderId'=>$ordersItems[$i]->id,'priceProduct'=>$productPrices[$i]->price,'totalPrice'=>$orders[0]->total_price,'productId'=>$ordersItems[$i]->product_id,'subOrderId'=>$ordersItems[$i]->order_id]) }}">
                     <button type="submit" <?php if ($disable[$i] == true){ ?> disabled <?php   } ?>>
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash-circle-fill" viewBox="0 0 16 16">
                             <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4.5 7.5a.5.5 0 0 0 0 1h7a.5.5 0 0 0 0-1h-7z"/>
@@ -23,7 +23,7 @@
                     </button>
                 </a>
                 <div>{{$ordersItems[$i]->quantity}}</div>
-                <a href="{{ route('plusOne',['ordersItems'=>$ordersItems[$i]->id,'ordersItems2'=>$ordersItems[$i]->product_id,'ordersItems3'=>$ordersItems[$i]->order_id])  }}">
+                <a href="{{ route('plusOne',['orderId'=>$ordersItems[$i]->id,'priceProduct'=>$productPrices[$i]->price,'totalPrice'=>$orders[0]->total_price,'productId'=>$ordersItems[$i]->product_id,'subOrderId'=>$ordersItems[$i]->order_id])  }}">
                     <button type="submit">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
                             <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
@@ -46,9 +46,14 @@
             <br>
 
         @endfor
+        <a href="{{ route('dashboard') }}">
+            <button class="basket">Back to main</button>
+        </a>
     @else
         <div style="font-size: 150%;font-weight:bold;margin-top:50px;">There's nothing in your basket, go and buy something ;)</div>
-
+        <a href="{{ route('dashboard') }}">
+            <button class="basket">Back to main</button>
+        </a>
     @endif
     
 </div>

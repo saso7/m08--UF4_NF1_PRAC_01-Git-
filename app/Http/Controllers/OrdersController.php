@@ -43,11 +43,14 @@ class OrdersController extends Controller
             // dd($disable);
             // $productNames[$i] = DB::table('products')->select('name')->where('id',$ordersItems[$i]->product_id)->get();
 
-            
-            $productNames = DB::table('products')->select('name')->whereIn('id',$idList)->get();
+            $ids = implode(',', $idList);
+            // dd($ids);
+            // the whereIn function gives back the right information but disordered, so to solve that we will have to use the orderByRaw
+            $productNames = DB::table('products')->select('name')->whereIn('id',$idList)->orderByRaw("FIELD(id, $ids)")->get();
             // dd($productNames);
             $productPrices = DB::table('products')->select('price')->whereIn('id',$idList)->get();
             // dd($productPrices);
+            // 443.47,724.49,335.02,317.89
             $listPricePerProductTotal = [];
             for($x=0;$x<count($productPrices);$x++){
                 $listPricePerProductTotal[$x] =  $ordersItems[$x]->quantity*$productPrices[$x]->price;

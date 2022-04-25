@@ -71,9 +71,10 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('/add/Basket/{productId}', [ProductController::class, "addToBasket"])->name('addtobasket');
     
     Route::get('/basket', [OrdersController::class, "indexBasket"])->name('basket');
-    Route::get('/basket/minus/{ordersItems}/{ordersItems2}/{ordersItems3}', [OrdersItemsController::class, "minusOne"])->name('minusOne');
-    Route::get('/basket/plus/{ordersItems}/{ordersItems2}/{ordersItems3}', [OrdersItemsController::class, "plusOne"])->name('plusOne');
+    Route::get('/basket/minus/{orderId}/{priceProduct}/{totalPrice}/{productId}/{subOrderId}', [OrdersItemsController::class, "minusOne"])->name('minusOne');
+    Route::get('/basket/plus/{orderId}/{priceProduct}/{totalPrice}//{productId}/{subOrderId}', [OrdersItemsController::class, "plusOne"])->name('plusOne');
     Route::get('/basket/delete/{subOrderId}/{priceOfSubOrder}', [OrdersItemsController::class, "delete_subOrder"])->name('delete_subOrder');
+    
     
 });
 
