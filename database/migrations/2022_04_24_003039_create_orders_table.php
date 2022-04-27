@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->integer('users_id')->nullable(false)->constrained()->onDelete('cascade')->onUpdate('no action')->unique();
+            $table->integer('users_id')->nullable(false)->constrained()->onDelete('cascade')->onUpdate('no action');
             $table->decimal('total_price')->nullable(false);
             $table->enum('status',['pending','completed','delivered'])->nullable(false)->default('pending');
             

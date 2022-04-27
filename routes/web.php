@@ -19,9 +19,7 @@ use App\Http\Controllers\OrdersItemsController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
@@ -34,6 +32,10 @@ Route::get('/', function () {
 // Route::get('/admin/products', function () {
 //     return view('admin');
 // })->middleware(['auth'])->name('admin');
+
+Route::get('/', function () {
+    return view('welcome');
+});
 
 Route::group(['middleware' => ['auth']], function() {
     // ADMIN PART
@@ -64,7 +66,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/products/edition/{product}', [ProductController::class, "formEdit"])->name('form.edit.products');
 
     
-    Route::post('/categories/delete/{order}', [OrdersController::class, "delete"])->name('delete_order');
+    Route::post('/order/delete/{order}', [OrdersController::class, "delete"])->name('delete_order');
     Route::post('/categories/delete/{category}', [CategoryController::class, "delete"])->name('deleting_category');
     Route::post('/products/delete/{product}', [ProductController::class, "delete"])->name('delete_product');
 
@@ -73,6 +75,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/televisions', [ProductController::class, "indexTv"])->name('televisions');
     Route::get('/productDetail/{product}', [ProductController::class, "productDetail"])->name('productDetail');
     Route::post('/add/Basket/{productId}', [ProductController::class, "addToBasket"])->name('addtobasket');
+    Route::get('/buy/{orderId}', [OrdersController::class, "buy"])->name('buy');
+    
     
     Route::get('/basket', [OrdersController::class, "indexBasket"])->name('basket');
     Route::get('/basket/minus/{orderId}/{priceProduct}/{totalPrice}/{productId}/{subOrderId}', [OrdersItemsController::class, "minusOne"])->name('minusOne');

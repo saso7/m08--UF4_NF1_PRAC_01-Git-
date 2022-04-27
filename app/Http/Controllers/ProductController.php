@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Validator;
 
 class ProductController extends Controller
 {
@@ -64,7 +65,7 @@ class ProductController extends Controller
     public function addToBasket($product,Request $request){
         $user_id = Auth::user()->id;
         $order_id = DB::table('orders')->select('id')->where('users_id',$user_id)->where('status','pending')->get();
-        
+        // DB::table('products')->select('amount')->where('users_id',$user_id)->where('status','pending')->get();
         // if the order already exists and it has been completed(payed)already means we have to create another order with same user_id
         if($order_id->isEmpty()){
             // $productPrice = DB::table('products')->select('price')->where('id',$product)->get();
@@ -230,21 +231,23 @@ class ProductController extends Controller
 
     public function edit(Request $request)
     {
-        if(DB::table('products')->where('name',$request->name)){
+        Validator::make($request->all(), [
+            'name' => ['required', 'string', 'exists:products,name'],
+            'newName' => ['required', 'alpha', 'max:50', 'min:1'],
+            'newPrice' => ['required', 'numeric'],
+            'newAmount' => ['required', 'integer'],
+            'newDescription' => ['required', 'string', 'max:255', 'min:1'],
+            'newImage' => ['mimes:jpg,png,jpeg,gif,svg|max:2048|dimensions:min_width=100,min_height=100,max_width=1000,max_height=1000'],
+            'newCategoryId' => ['required', 'numeric', 'max:20']
+        ])->validate();
+
             $name = $request->newName;
             $price = $request->newPrice;
             $amount = $request->newAmount;
             $description = $request->newDescription;
             $category = $request->newCategoryId;
             $updated = now();
-            if($request->hasFile('newImage')!=null){
-                $path = $request->file('newImage')->storeAs('public/images',$request->file('newImage')->getClientOriginalName());
-                // $pathComplert = asset($path);
-            }
-            else{
-                $table = DB::table('products')->where('name',$name)->get();
-                $path = $table[0]->file_path;
-            }
+
             
             DB::table('products')->where('name',$request->name)->update([
                 'name' => $name,
@@ -252,15 +255,15 @@ class ProductController extends Controller
                 'amount' => $amount,
                 'description' => $description,
                 'category_id' => $category,
-                'file_path'=>$path,
+                // 'file_path'=>$path,
                 'updated_at' => $updated,
             ]);
             $products = Product::all();
+            
             return view("shop.admin.products.listProducts", [
                 'products' => $products,
             ]);
 
-        }
     }
 
 

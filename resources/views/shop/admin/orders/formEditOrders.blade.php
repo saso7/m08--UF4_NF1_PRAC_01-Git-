@@ -12,12 +12,13 @@
             </select>
         </div>
         <div>
-            <label for="name">This is the 'status' from the actual it:</label>
+            <label for="name">This is the 'status' now:</label>
             <br>
 
-            <select id="newStatus" name="newStatus" required>
+            <select id="status" name="status" required>
                     <option value = "{{$order[0]->status}}" >{{$order[0]->status}}</option>
             </select>
+            
         </div>
         <br>
         <br>
@@ -29,6 +30,7 @@
                 <option value="completed">completed</option>
                 <option value="delivered">delivered</option>
             </select>
+            @error('newStatus')<div class="alert alert-danger">{{ $message }}</div>@enderror
         </div>
         <br>
         <div style="cursor: pointer;display:flex;justify-content: center;">

@@ -7,6 +7,8 @@ use App\Models\Category;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Query\Builder;
 use App\Http\Controllers\Post;
+use Illuminate\Support\Facades\Validator;
+
 
 class CategoryController extends Controller
 {
@@ -46,10 +48,16 @@ class CategoryController extends Controller
 
     public function add(Request $request)
     {
+        
+
+        Validator::make($request->all(), [
+            'name' => ['required', 'alpha', 'unique:categories,name',],
+        ])->validate();
         $name = $request->name;
         $created = now();
         $updated = now();
 
+        
 
         DB::table('categories')->insert([
             'name' => $name,
@@ -73,20 +81,20 @@ class CategoryController extends Controller
     }
 
     public function edit(Request $request)
-    {
-        if(DB::table('categories')->where('name',$request->name)){
-            
-            DB::table('categories')->where('name',$request->name)->update(['name'=>$request->newName]);
-            $categories = Category::all();
-            return view("shop.admin.categories.listCategories", [
-                'categories' => $categories,
-            ]);
-        }
+    {        
+        Validator::make($request->all(), [
+            'name' => ['required', 'string', 'exists:categories,name'],
+            'newName' => ['required', 'string', 'max:25', 'min:1','unique:categories,name'],
+        ])->validate();
+        DB::table('categories')->where('name',$request->name)->update(['name'=>$request->newName]);
+        return to_route('categories');
+
 
     }
 
     public function delete($category)
     {
+        // dd($category);
         if(DB::table('categories')->where('id',$category)){
             DB::table('categories')->where('id',$category)->delete();
             return redirect(route("categories"));

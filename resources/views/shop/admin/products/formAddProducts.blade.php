@@ -1,5 +1,14 @@
 @extends('layouts.adminHeaderTemplate')   
-@section('form')           
+@section('form')  
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif         
     <form action="{{route('add_product')}}" method="POST" enctype="multipart/form-data" style="text-align:center">
         @csrf
         <div class="add-prod-box">
@@ -8,6 +17,7 @@
             <input type="text" id="name" name="name" required
                 minlength="4" maxlength="15" size="20">
         </div>
+        @error('name')<div class="alert alert-danger" style="color:red">{{ $message }}</div>@enderror
         <br>
         <div class="add-prod-box">
             <label for="name">Price</label>

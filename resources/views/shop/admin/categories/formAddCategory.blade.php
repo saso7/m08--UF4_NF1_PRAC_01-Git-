@@ -8,6 +8,7 @@
             <br>
             <input type="text" id="name" name="name" required
                 minlength="4" maxlength="15" size="10">
+            @error('name')<div class="alert alert-danger">{{ $message }}</div>@enderror
         </div>
         <br>
         <br>
